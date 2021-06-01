@@ -1,0 +1,169 @@
+#--------------------------------------------------------###
+#                       ExRush			         ###
+#--------------------------------------------------------###
+on ignition:
+	if world is "ExRush1":
+		cancel event
+on burn:
+	if world is "ExRush1":
+		cancel event	
+on explode:
+	if world is "ExRush1":
+		loop all blocks in radius 6 around event-location:
+			if loop-blocks is tnt:
+				set block at loop-blocks to air
+				set {_x} to x-coordinate of loop-blocks
+				set {_y} to y-coordinate of loop-blocks
+				set {_z} to z-coordinate of loop-blocks
+				spawn an primed tnt at loop-blocks
+				teleport last spawned primed tnt at location {_x}, {_y}, {_z}
+				set fuse time of last spawned primed tnt to 80
+				teleport last spawned primed tnt at location of last spawned primed tnt
+		loop all players:
+			if distance between loop-player and event-location <= 5:
+				push loop-player upwards at speed 1.25
+				push loop-player in direction of loop-player at speed 1.75
+on respawn:
+	if world is "ExRush1":
+		teleport player to {spawn.er}
+command /setExplodeRush:
+    permission: perm.setexploderush
+    trigger:
+        set {spawn.er} to location of player
+        send "&7Le ExplodeRush a Ã©tÃ© crÃ©e en %location of player%"
+
+on place of sandstone:2:
+	loop all players:
+		if loop-player is in world "ExRush1" or "ExSpawn1": 
+			wait 10 seconds
+			set block to air
+on place of tnt:
+	loop all players:
+		if loop-player is in world "ExRush1" or "ExSpawn1": 
+			wait 10 seconds
+			set block to air
+
+on drop tnt or sandstone:2:
+	if player is in world "ExRush1":
+		wait 5 ticks
+		clear all dropped items
+
+on break of obsidian:
+	if player is in world "ExRush1":
+		if player is not op:
+			cancel event
+
+on break of sandstone:0:
+	if player is in world "ExRush1":
+		if player is not op:
+			cancel event
+
+on break of 169:
+	if player is in world "ExRush1":
+		if player is not op:
+			cancel event
+
+on damage:
+    if attacker isn't creeper:
+        if victim is a player:
+            if damage cause is entity explosion:
+                cancel event
+
+on rightclick with wool:5:
+	if name of tool is "&aJouer !":
+		teleport player to {1} or {2} or {3} or {4} or {5} or {6} or {7} or {8} or {9} or {10} or {11} or {12}
+		clear player's inventory
+		broadcast "&8[&6ExplodeRush&8] &3%player%&f a rejoint !"
+		equip player with all leather armour of feather falling 2000
+		wait 5 ticks
+		dye the player's helmet red
+		dye the player's chestplate red
+		dye the player's leggings red
+		dye the player's boots red
+		set slot 0 of player to iron sword of sharpness 1 and unbreaking 3
+		set slot 1 of player to 15 tnt
+		set slot 2 of player to flint and steel
+		set slot 3 of player to 64 sandstone:2
+		set slot 4 of player to 64 sandstone:2
+		set slot 5 of player to 64 sandstone:2
+		set slot 6 of player to 64 sandstone:2
+		set slot 7 of player to 32 steak
+		set slot 8 of player to 5 golden apple
+		set slot 9 of player to 64 sandstone:2
+		set slot 10 of player to 64 sandstone:2
+		set slot 11 of player to 64 sandstone:2
+		set the maximum health of the player to 30
+		heal player
+
+command /laine:
+	permission: laine.give
+	trigger:
+		set slot 4 of player to wool:5 named "&aJouer !"
+on death:
+	if player is in world "ExRush1":
+		set death message to "&8[&6ExplodeRush&8] &3%player% &fest mort."
+		teleport player to {spawn.er}
+		set slot 4 of player to wool:5 named "&aJouer !"
+		set the maximum health of the player to 10
+#--------------------------------------------------------###
+
+command /setspawn1:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {1} to player's location
+command /setspawn2:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {2} to player's location
+command /setspawn3:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {3} to player's location
+command /setspawn4:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {4} to player's location
+command /setspawn5:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {5} to player's location
+command /setspawn6:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {6} to player's location
+command /setspawn7:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {7} to player's location
+command /setspawn8:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {8} to player's location
+command /setspawn9:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {9} to player's location
+command /setspawn10:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {10} to player's location
+command /setspawn11:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {11} to player's location
+command /setspawn12:
+	permission: set.spawn
+	trigger:
+		send "&cSpawn set" to player
+		set {12} to player's location
